@@ -24,14 +24,13 @@ jobs:
       with:
         go-version: ${{ matrix.go }}
 
-    - name: Install 
-      run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1
-
     - name: Build
       run: make
 
     - name: Run golangci-lint
-      run: make check
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: v1.50.1
 
     - name: Test
       run: make test
